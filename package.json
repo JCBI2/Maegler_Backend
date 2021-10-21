@@ -1,0 +1,29 @@
+{
+  "name": "Maegler_Backend",
+  "version": "1.0.0",
+  "description": "Repositorio correspondiente al backend utilizado en el proyecto de la clase de Desarrollo Web en la UNAH",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LKezHn/Maegler_Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LKezHn/Maegler_Backend/issues"
+  },
+  "homepage": "https://github.com/LKezHn/Maegler_Backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.11",
+    "multer": "^1.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
