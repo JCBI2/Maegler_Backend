@@ -22,5 +22,7 @@ router.post("/login", DriverController.loginDriver)
 /** PUT  */
 // Aprobar  repartidor
 router.put("/:id/approve", DriverController.approveDriver)
+// Actualizar contraseña
+router.put("/:id/changePassword", DriverController.changeDriverPassword)
 
 module.exports = router
