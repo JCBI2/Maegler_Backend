@@ -8,12 +8,14 @@ const employeeSchema = new Schema({
     },
     request_status: {
         type: String,
-        required: false
+        required: false,
+        default: 'in revision'
     },
     position: {
         type: String,
         enum: ['admin', 'driver'],
-        required: true
+        required: true,
+        default: 'driver'
     },
     email: {
         type: String,
@@ -21,6 +23,14 @@ const employeeSchema = new Schema({
         required: true
     },
     password: {
+        type: String,
+        required: true
+    },
+    profilePhoto: {
+        type: String,
+        required: true
+    },
+    phone: {
         type: String,
         required: true
     },

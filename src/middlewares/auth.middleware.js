@@ -1,4 +1,4 @@
-const jwt = requite("../modules/jwt.js")
+const jwt = require("../modules/jwt.js")
 
 const verifyToken = (req, res, next) => {
     try{
@@ -8,9 +8,9 @@ const verifyToken = (req, res, next) => {
         req.user = { id, role }
         next();
     }catch( err){
-        res.status(400).send({ message: "Invalid token"})
+        return res.status(400).send({ message: "Invalid token"})
     }
 }
 
-module.exports = verifyToken
+module.exports = { verifyToken }
 

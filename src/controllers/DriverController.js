@@ -11,19 +11,25 @@ class DriverController {
     }
 
     getDriver(req, res) {
-        Employee.findById(req.params.id, {password: 0, commission: 0, position: 0, email: 0}).then((result) => {
-            res.status(200).send({ employee: result })
-        }).catch(err => res.status(400).send({ message: err }))
+        if(req.user.role == "driver"){
+            Employee.findById(req.user.id, {position: 0}).then((result) => {
+                res.status(200).send({ employee: result })
+            }).catch(err => res.status(400).send({ message: err }))
+        }else{
+            Employee.findById(req.user.id, {password: 0, position: 0, commission: 0, email: 0}).then((result) => {
+                res.status(200).send({ employee: result })
+            }).catch(err => res.status(400).send({ message: err }))
+        }
     }
 
     async changeDriverPassword(req, res){
-        const employee = await Employee.findById(req.params.id)
+        const employee = await Employee.findById(req.user.id)
         try{
             employee.password = await employee.encryptPass(req.body.password)
             await employee.save()
             res.status(200).send({ message: 'Password changed'})
         }catch(err){
-            res.staus(400).send({ message: err})
+            res.status(400).send({ message: err})
         }
     }
 
@@ -40,7 +46,6 @@ class DriverController {
         }
     }
 
-    //TODO Mover funcion al controller del admin
     approveDriver(req, res) {
         Employee.findByIdAndUpdate(req.params.id, {
             request_status: "approved"

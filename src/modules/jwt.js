@@ -7,7 +7,7 @@ const generateToken = (id, role ) => {
 }
 
 const verifyToken = (token) => {
-    return jwt.verifyToken(token, secret)
+    return jwt.verify(token, secret)
 }
 
 module.exports = { generateToken, verifyToken }
