@@ -4,10 +4,26 @@ const jwt = require("../modules/jwt.js")
 class DriverController {
     constructor() { }
 
-    getDrivers(req, res) {
-        Employee.find({}, { password: 0, position: 0, commission: 0, updatedAt: 0}).then((result) => {
-            res.status(200).send({ employees: result })
-        }).catch(err => res.status(400).send({ message: err }))
+    getAcceptedDrivers(req, res) {
+        if(req.user.role === 'admin'){
+            Employee.find({position: "driver", request_status: "approved"}, 
+            { password: 0, position: 0, phone: 0, commission: 0, updatedAt: 0, request_status: 0}).then((result) => {
+                res.status(200).send({ employees: result })
+            }).catch(err => res.status(400).send({ message: err }))
+        }else{
+            return res.status(400).send({ message: "Unauthorized user"})
+        }
+    }
+
+    getForAcceptDrivers(req, res) {
+        if(req.user.role === 'admin'){
+            Employee.find({position: "driver", request_status: "in revision"}, 
+            { password: 0, position: 0, phone: 0, commission: 0, updatedAt: 0, request_status: 0}).then((result) => {
+                res.status(200).send({ employees: result })
+            }).catch(err => res.status(400).send({ message: err }))
+        }else{
+            return res.status(400).send({ message: "Unauthorized user"})
+        }
     }
 
     getDriver(req, res) {
@@ -57,7 +73,7 @@ class DriverController {
     }
 
     async loginDriver(req, res) {
-        const employee = await Employee.findOne({email: req.body.email}, { _id: 1, password: 1, position: 1})
+        const employee = await Employee.findOne({email: req.body.email}, { _id: 1, password: 1, position: 1, request_status: 1})
         if(!employee){
             return res.status(404).send({ message: 'User not found'})
         }
@@ -70,7 +86,7 @@ class DriverController {
 
         const token = await jwt.generateToken(employee._id, employee.position)
         
-        res.status(200).send({ message: "User logged", token})
+        res.status(200).send({ message: "User logged", token, request_status: employee.request_status})
     }
 
 }

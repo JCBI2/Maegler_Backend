@@ -11,13 +11,13 @@ class AdminController {
             return res.status(404).send({message: 'User not found'})
         }
 
-        const userIsValid = await employee.verifyPass(req.body.password, employee.password)
+        const userIsValid = employee.password === req.body.password
 
-        if(!userIsValid || employee.position !== "admin"){
+        if(!userIsValid){
             return res.status(401).send({ message: 'Unauthorized user'})
         }
 
-        const token = await jwt.generateToken(employee._id, employeee.position)
+        const token = await jwt.generateToken(employee._id, employee.position)
 
         res.status(200).send({ message: 'User logged', token})
 

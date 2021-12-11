@@ -8,8 +8,10 @@ const { verifyToken } = require("../middlewares/auth.middleware")
 const router = Router();
 
 /** GET  */
-// Obtener lista de repartidores
-router.get("/", DriverController.getDrivers)
+// Obtener lista de repartidores aceptados
+router.get("/accepted", verifyToken, DriverController.getAcceptedDrivers)
+// Obtener lista de repartidores por aceptar
+router.get("/for-accept", verifyToken, DriverController.getForAcceptDrivers)
 // Obtener información de un repartidor
 router.get("/profile", verifyToken, DriverController.getDriver)
 // Obtener lista de órdenes tomadas por un repartidor
