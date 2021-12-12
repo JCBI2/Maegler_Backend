@@ -23,6 +23,7 @@ router.post('/', function(req, res){
         id_cliente: req.body.id_cliente,
         nombre_empresa: req.body.empresa,
         productos: req.body.productos,
+        logo: req.body.logo,
         direccion: req.body.dir,
         subtotal: req.body.subtotal,
         total: req.body.total,
