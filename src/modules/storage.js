@@ -14,6 +14,9 @@ const userStorage = multer.diskStorage({
 
 const userFields = [ {
     name: 'profilePhoto', maxCount: 1
-}]
+},{
+    name: 'imagen', maxCount: 1
+}
+]
 
 module.exports = { userStorage, userFields }

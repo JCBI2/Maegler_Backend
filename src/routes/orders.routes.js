@@ -17,6 +17,21 @@ router.get('/:idUsuario/alls', function(req, res){
     })
 });
 
+router.get('/alls', function(req, res){
+    order.find({
+        "estado": "En proceso"
+    }, 
+    ).then(result=>{
+        result.id_cliente = "Juan Carlos"
+        res.send(result);
+        res.end();
+    })
+    .catch(error=>{
+        res.send(error);
+        res.end();
+    })
+});
+
 router.post('/', function(req, res){
     console.log(req.body);
     let or = new order({
