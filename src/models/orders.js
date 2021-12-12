@@ -6,11 +6,11 @@ var esquema = new mongoose.Schema(
         nombre_empresa: { type: String, required: true},
         productos: { type: Array, required: true},
         estado: { type: String, default: "En proceso"},
-        direccion: { latitud: String, longitud: String },
+        direccion: { type: mongoose.Schema.Types.Mixed },
         subtotal: { type: Number, required: true},
         total: { type: Number, required: true},
         metodo_pago: { type: String, default: "Efectivo"}
-    }
+    },{timestamps: true}
 );
 
 module.exports = mongoose.model('ordenes', esquema);
