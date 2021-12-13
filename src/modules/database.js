@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const connection = mongoose.connect("mongodb://localhost:27017/Maegler", 
+const connection = mongoose.connect("mongodb+srv://JCBI:Qwerty@cluster0.oc2ob.mongodb.net/Maegler?retryWrites=true&w=majority", 
   {
     useNewUrlParser: true, useUnifiedTopology : true
   }
